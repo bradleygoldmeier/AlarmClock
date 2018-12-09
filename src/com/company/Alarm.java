@@ -59,9 +59,20 @@ public class Alarm {
 
     public static void checkAlarm(LocalTime now) {
         for(int i = 0; i < alarms.size(); i++) {
-            if (now.getHour() == alarms.peek().getHour() && now.getMinute() == alarms.peek().getMinute()){
+            if (now.getHour() == alarms.peek().getHour() &&
+                now.getMinute() == alarms.peek().getMinute() &&
+                now.getSecond() == alarms.peek().getSecond()){
                 System.out.println("BEEP!!!!!");
+                snooze(now);
             }
+        }
+    }
+
+    public static void snooze(LocalTime now){
+        System.out.println("Do you want to snooze the alarm?");
+        userInput = scanner.nextLine();
+        if(userInput.equalsIgnoreCase("yes")){
+            alarms.add(LocalTime.of(now.getHour(),now.getMinute() + 5));
         }
     }
 }
