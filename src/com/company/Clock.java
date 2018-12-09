@@ -8,7 +8,10 @@ import java.time.LocalTime;
  */
 public class Clock {
 
+    Alarm alarm = new Alarm();
+
     public void updateAndPrintTime() {
+
         LocalTime now = LocalTime.now();
         if (now.getNano() == 0) {
             System.out.println(now);

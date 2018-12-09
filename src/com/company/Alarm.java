@@ -13,9 +13,34 @@ import java.util.Scanner;
  */
 public class Alarm {
     public static LinkedList<LocalTime> alarms = new LinkedList();
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
+    static String userInput;
 
-    public void setAlarm() {
+    Alarm() {
+        System.out.println("Do you want to add default alarms at 6AM and 6:30AM?");
+        userInput = scanner.nextLine();
+        if (userInput.equalsIgnoreCase("yes")){
+            setDeafultAlarms();
+            }
+        askUser();
+    }
+
+    private static void setDeafultAlarms() {
+        alarms.add(LocalTime.of(6,0));
+        alarms.add(LocalTime.of(6,30));
+    }
+
+    public static void askUser() {
+        System.out.println("do you want to add an alarm?");
+        userInput = scanner.nextLine();
+        while (userInput.equalsIgnoreCase("yes")) {
+            setAlarm();
+            System.out.println("do you want to add an alarm?");
+            userInput = scanner.nextLine();
+        }
+    }
+
+    public static void setAlarm() {
         int hour;
         int minute;
 
@@ -28,7 +53,7 @@ public class Alarm {
         System.out.printf("you set an alarm at %02d:%02d", hour, minute);
         System.out.println();
 
-        alarms.add(LocalTime.of(hour,minute));
+
         //addAlarm(hour, minute);
     }
 
