@@ -1,11 +1,7 @@
 package com.company;
 
-import sun.awt.image.ImageWatched;
-
 import java.time.LocalTime;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -20,12 +16,12 @@ public class Alarm {
         System.out.println("Do you want to add default alarms at 6AM and 6:30AM?");
         userInput = scanner.nextLine();
         if (userInput.equalsIgnoreCase("yes")){
-            setDeafultAlarms();
+            setDefaultAlarms();
             }
         askUser();
     }
 
-    private static void setDeafultAlarms() {
+    public static void setDefaultAlarms() {
         alarms.add(LocalTime.of(6,0));
         alarms.add(LocalTime.of(6,30));
     }
@@ -59,9 +55,9 @@ public class Alarm {
 
     public static void checkAlarm(LocalTime now) {
         for(int i = 0; i < alarms.size(); i++) {
-            if (now.getHour() == alarms.peek().getHour() &&
-                now.getMinute() == alarms.peek().getMinute() &&
-                now.getSecond() == alarms.peek().getSecond()){
+            if (now.getHour() == alarms.get(i).getHour() &&
+                now.getMinute() == alarms.get(i).getMinute() &&
+                now.getSecond() == alarms.get(i).getSecond()){
                 System.out.println("BEEP!!!!!");
                 snooze(now);
             }
