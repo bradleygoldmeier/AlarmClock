@@ -8,7 +8,7 @@ import java.time.LocalTime;
  */
 public class Clock {
 
-    Alarm alarm = new Alarm();
+    AlarmClock alarmClock = new AlarmClock(null);
 
     public void updateAndPrintTime() {
 
@@ -23,6 +23,6 @@ public class Clock {
             e.printStackTrace();
         }
 
-        Alarm.checkAlarm(now);
+        alarmClock.checkAlarm(now);
     }
 }
