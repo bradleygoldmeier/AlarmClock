@@ -67,7 +67,7 @@ public class AlarmClock implements IAlarmClock{
                 }
                 System.out.println("BEEP!!!!!");
                 //alarmClockRinger.ring();
-                snooze(alarm); 
+                snooze(alarm);
                 //alarm.resetAlarm();
                 if (alarm.inSnoozeMode){
                     alarms.remove(alarm);
