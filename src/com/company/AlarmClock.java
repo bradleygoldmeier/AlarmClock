@@ -58,29 +58,31 @@ public class AlarmClock implements IAlarmClock{
     }
 
     public void checkAlarm(LocalTime now) {
-        for(Alarm alarm : getAlarms()) {
-            if (alarm.shouldActivateAlarm(LocalTime.now())){
+        for(int i = 0; i < alarms.size(); i++) {
+            if (alarms.get(i).shouldActivateAlarm(LocalTime.now())){
+                alarms.get(i).setRang(true);
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println("BEEP!!!!!");
-                //alarmClockRinger.ring();
-                snooze(alarm);
-                //alarm.resetAlarm();
-                if (alarm.inSnoozeMode){
-                    alarms.remove(alarm);
+                snooze(alarms.get(i));
+                if (!alarms.get(i).inSnoozeMode){
+                    alarms.get(i).resetAlarm(alarms.get(i));
+                }
+                if (alarms.get(i).inSnoozeMode){
+                    alarms.remove(alarms.get(i));
                 }
             }
         }
     }
 
     public void snooze(Alarm currentAlarm){
-        System.out.println("Do you want to snooze the alarm?");
-        userInput = scanner.nextLine();
+        userInput = JOptionPane.showInputDialog("Do you want to snooze the alarm?");
         if(userInput.equalsIgnoreCase("yes")){
-            currentAlarm.snooze();
+            Alarm snoozedAlarm = currentAlarm.snooze();
+            addAlarm(snoozedAlarm);
         }
     }
 

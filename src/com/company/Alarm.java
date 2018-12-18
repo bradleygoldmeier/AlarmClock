@@ -12,6 +12,8 @@ public class Alarm {
     private int snoozeInMinutes = 1;
     private boolean isRinging;
     public boolean inSnoozeMode;
+    private boolean rang;
+
 
 
     public  Alarm(LocalTime alarmTime){
@@ -43,17 +45,27 @@ public class Alarm {
     public boolean shouldActivateAlarm(LocalTime localTime){
         return alarmTime.getHour() == localTime.getHour()
                 && alarmTime.getMinute() == localTime.getMinute()
-                && localTime.getNano() == 0;
+                && localTime.getNano() == 0
+                && !rang;
     }
 
-    public void snooze() {
+    public Alarm snooze() {
         Alarm snoozeAlarmTime = new Alarm(alarmTime.plusMinutes(this.snoozeInMinutes));
         snoozeAlarmTime.inSnoozeMode = true;
+        return snoozeAlarmTime;
     }
 
-    public void resetAlarm() {
-        originalAlarmTime = originalAlarmTime.plusHours(24);
-        alarmTime = originalAlarmTime;
-        inSnoozeMode = false;
+    public void resetAlarm(Alarm alarm) {
+        ResetAlarm reset = new ResetAlarm(alarm);
+        reset.start();
+    }
+
+
+    public boolean getRang() {
+        return rang;
+    }
+
+    public void setRang(boolean rang) {
+        this.rang = rang;
     }
 }
