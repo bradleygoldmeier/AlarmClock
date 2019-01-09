@@ -68,4 +68,8 @@ public class Alarm {
     public void setRang(boolean rang) {
         this.rang = rang;
     }
+
+    public int getSnoozeInMinutes(){
+        return snoozeInMinutes;
+    }
 }
